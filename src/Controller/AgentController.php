@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Agent;
 use App\Form\AgentType;
+use App\Form\RechercheClientType;
 use App\Repository\AgentRepository;
+use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,13 +21,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class AgentController extends AbstractController
 {
     /**
-     * @Route("/", name="agent_index", methods={"GET"})
+     * @Route("/", name="agent_index", methods={"GET","POST"})
      * 
      */
-    public function index(AgentRepository $agentRepository): Response
+    public function index(ClientRepository $clientRepository,AgentRepository $agentRepository,Request $request): Response
     {
+        $form = $this->createForm(RechercheClientType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $id=$form->get('recherche')->getData();
+ 
+            return $this->render('client/show.html.twig', [
+                'client' => $clientRepository->findById($id)[0],
+            ]);
+        }
         return $this->render('agent/index.html.twig', [
-            'agents' => $agentRepository->findAll(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -53,7 +64,7 @@ class AgentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="agent_show", methods={"GET"})
+     * @Route("/detail/{id}", name="agent_show", methods={"GET"})
      */
     public function show(Agent $agent): Response
     {

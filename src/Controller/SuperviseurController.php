@@ -54,7 +54,7 @@ class SuperviseurController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="superviseur_show", methods={"GET"})
+     * @Route("/detail/{id}", name="superviseur_show", methods={"GET"})
      */
     public function show(Superviseur $superviseur): Response
     {

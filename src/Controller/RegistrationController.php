@@ -35,7 +35,6 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
- 
             $type=$form->get('roles')->getData();
             switch ($type[0]) {
                 case "ROLE_AGENT":
@@ -43,7 +42,7 @@ class RegistrationController extends AbstractController
                     $agent->setNom($user->getNom());
                     $agent->setPrenom($user->getPrenom());
                     $agent->setEmail($user->getEmail());
-                    $agent->setLogin($user->getLogin());
+                    $agent->setPhotoUrl($user->getPhotoUrl());
                     $agent->setCode($user->getCode());
                     $agent->setTel($user->getTel());
                     $agent->setPassword($user->getPassword());
@@ -55,7 +54,7 @@ class RegistrationController extends AbstractController
                     $back->setNom($user->getNom());
                     $back->setPrenom($user->getPrenom());
                     $back->setEmail($user->getEmail());
-                    $back->setLogin($user->getLogin());
+                    $back->setPhotoUrl($user->getPhotoUrl());
                     $back->setCode($user->getCode());
                     $back->setTel($user->getTel());
                     $back->setPassword($user->getPassword());
@@ -67,7 +66,7 @@ class RegistrationController extends AbstractController
                     $super->setNom($user->getNom());
                     $super->setPrenom($user->getPrenom());
                     $super->setEmail($user->getEmail());
-                    $super->setLogin($user->getLogin());
+                    $super->setPhotoUrl($user->getPhotoUrl());
                     $super->setCode($user->getCode());
                     $super->setTel($user->getTel());
                     $super->setPassword($user->getPassword());
@@ -79,7 +78,7 @@ class RegistrationController extends AbstractController
                     $admin->setNom($user->getNom());
                     $admin->setPrenom($user->getPrenom());
                     $admin->setEmail($user->getEmail());
-                    $admin->setLogin($user->getLogin());
+                    $admin->setPhotoUrl($user->getPhotoUrl());
                     $admin->setCode($user->getCode());
                     $admin->setTel($user->getTel());
                     $admin->setPassword($user->getPassword());

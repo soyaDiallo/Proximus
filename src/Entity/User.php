@@ -36,48 +36,43 @@ class User implements UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $email;
+    protected $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    protected $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    protected $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $code;
+    protected $code;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom;
+    protected $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $prenom;
+    protected $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $login;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $tel;
+    protected $tel;
 
     public function getId(): ?int
     {
@@ -199,18 +194,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLogin(): ?string
-    {
-        return $this->login;
-    }
-
-    public function setLogin(string $login): self
-    {
-        $this->login = $login;
-
-        return $this;
-    }
-
     public function getTel(): ?string
     {
         return $this->tel;
@@ -221,5 +204,9 @@ class User implements UserInterface
         $this->tel = $tel;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->email;
     }
 }

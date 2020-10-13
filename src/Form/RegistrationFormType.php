@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -31,10 +32,19 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => false
             ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+            ->add('plainPassword', RepeatedType::class, array(
                 'mapped' => false,
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les deux mots de passe doivent être identiques',
+                'options' => array(
+                    'attr' => array(
+                        'class' => 'password-field',
+                        'placeholder' => 'Nouveau mot de passe'
+                    ),
+                    'label' => false
+                ),
+                'first_options'  => ['label' => 'mot de passe'],
+                'second_options' => ['label' => 'Confirmer mot de passe'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -46,11 +56,11 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
+                'required' => true,
+            ))
             ->add('nom')
             ->add('prenom')
             ->add('code')
-            ->add('login')
             ->add('tel')
         ;
         $builder->get('roles')

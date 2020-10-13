@@ -34,6 +34,11 @@ class Offre
      */
     private $dateSignature;
 
+     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateAnnulation;
+
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -63,6 +68,11 @@ class Offre
      * @ORM\OneToMany(targetEntity=OffreProduit::class, mappedBy="offre")
      */
     private $offreProduits;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Raison::class, inversedBy="offres")
+     */
+    private $raison;
 
     public function __construct()
     {
@@ -108,6 +118,18 @@ class Offre
     public function setDateSignature(\DateTimeInterface $dateSignature): self
     {
         $this->dateSignature = $dateSignature;
+
+        return $this;
+    }
+
+    public function getDateAnnulation(): ?\DateTimeInterface
+    {
+        return $this->dateAnnulation;
+    }
+
+    public function setDateAnnulation(\DateTimeInterface $dateAnnulation): self
+    {
+        $this->dateAnnulation = $dateAnnulation;
 
         return $this;
     }
@@ -218,6 +240,18 @@ class Offre
                 $offreProduit->setOffre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRaison(): ?Raison
+    {
+        return $this->raison;
+    }
+
+    public function setRaison(?Raison $raison): self
+    {
+        $this->raison = $raison;
 
         return $this;
     }

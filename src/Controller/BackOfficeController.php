@@ -52,7 +52,7 @@ class BackOfficeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="back_office_show", methods={"GET"})
+     * @Route("/detail/{id}", name="back_office_show", methods={"GET"})
      */
     public function show(BackOffice $backOffice): Response
     {

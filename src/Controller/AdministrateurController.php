@@ -23,8 +23,11 @@ class AdministrateurController extends AbstractController
      */
     public function index(AdministrateurRepository $administrateurRepository): Response
     {
+        //$admin= $administrateurRepository->findAll();
+       // dd($admin);
         return $this->render('administrateur/index.html.twig', [
             'administrateurs' => $administrateurRepository->findAll(),
+            
         ]);
     }
 
@@ -52,7 +55,7 @@ class AdministrateurController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="administrateur_show", methods={"GET"})
+     * @Route("/detail/{id}", name="administrateur_show", methods={"GET"})
      */
     public function show(Administrateur $administrateur): Response
     {

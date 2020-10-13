@@ -4,5 +4,16 @@
 
 {% block body %}
     <h1>Administrateur index</h1>
-
+    <a  href="{{ path('administrateur_show', {'id': app.user.id}) }}">
+        Detail
+    </a><br>
+    <a  href="{{ path('administrateur_edit', {'id': app.user.id}) }}">
+        Modifier 
+    </a><br>
+     <a  href="{{ path('modification_email') }}">
+        modifier email
+    </a><br>
+    <a  href="{{ path('modifier_password') }}">
+        modifier password
+    </a>
 {% endblock %}
